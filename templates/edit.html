@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-3">
+          <div class="card-body">
+            <h3 class="mb-4 text-center">Edit Task</h3>
+
+            <form method="POST" action="{{ url_for('edit_task', task_id=task.id) }}">
+              {{ form.hidden_tag() }}
+
+              <!-- Task Name -->
+              <div class="mb-3">
+                {{ form.task(class="form-control") }}
+                {% for error in form.task.errors %}
+                  <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <!-- Card Dropdown -->
+              <div class="mb-3">
+                {{ form.choices.label(class="form-label") }}
+                {{ form.choices(class="form-select") }}
+                {% for error in form.choices.errors %}
+                  <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <!-- Buttons -->
+              <div class="d-flex justify-content-between">
+                <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+                {{ form.submit(class="btn btn-primary") }}
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
