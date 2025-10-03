@@ -1,0 +1,126 @@
+/* === Global === */
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #f0f6fc !important;
+}
+
+/* Paragraphs, labels, spans */
+p, label, small, span {
+  color: #c9d1d9 !important;
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: #161b22 !important;
+}
+.navbar .navbar-brand { color: #f0f6fc !important; }
+.navbar .nav-link {
+  color: #c9d1d9 !important;
+  transition: color 0.2s ease;
+}
+.navbar .nav-link:hover { color: #58a6ff !important; }
+.navbar .nav-link.text-danger { color: #f85149 !important; }
+.navbar .nav-link.text-success { color: #3fb950 !important; }
+
+/* === Hero Section === */
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #0d1117;
+}
+.hero-section h1 {
+  font-weight: 700;
+  color: #f0f6fc !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.hero-section h1:hover { color: #58a6ff; transform: scale(1.05); }
+.hero-section p { font-size: 1.2rem; color: #c9d1d9 !important; }
+
+/* === Cards === */
+.card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+}
+.card:hover {
+  border-color: #58a6ff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  transform: translateY(-5px);
+}
+.card-title { color: #f0f6fc; font-weight: 600; }
+.card p, .card label { color: #c9d1d9 !important; }
+
+/* === Form Controls === */
+.form-control,
+.form-select {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: #161b22;
+  border-color: #58a6ff;
+  color: #f0f6fc;
+  box-shadow: 0 0 0 0.2rem rgba(88,166,255,0.25);
+}
+.form-control::placeholder { color: rgba(201, 209, 217, 0.6) !important; }
+.form-check-label { transition: color 0.3s ease, text-decoration 0.3s ease; }
+
+/* === Buttons === */
+.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  border-radius: 8px;
+}
+.btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.4); }
+
+.btn-success { background-color: #238636; border: none; color: #fff; }
+.btn-success:hover { background-color: #2ea043; }
+
+.btn-outline-danger { border-color: #f85149; color: #f85149; }
+.btn-outline-danger:hover { background-color: #f85149; color: #fff; }
+
+.btn-primary { background-color: #1f6feb; border: none; color: #fff; }
+.btn-primary:hover { background-color: #388bfd; }
+
+/* === Alerts === */
+.alert { border-radius: 8px; font-weight: 500; }
+.alert-success { background-color: #2ea043; color: #fff; }
+.alert-danger { background-color: #f85149; color: #fff; }
+.alert-info { background-color: #1f6feb; color: #fff; }
+.alert-warning { background-color: #d29922; color: #fff; }
+
+/* === Footer === */
+footer {
+  background-color: #161b22;
+  color: #8b949e;
+  padding: 15px 0;
+}
+footer small { color: #8b949e; }
+
+/* === Links === */
+a { color: #58a6ff; text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: #79c0ff; text-decoration: underline; }
+
+/* === Task Completion Label Styling === */
+.form-check-input:checked + .form-check-label {
+  color: #3fb950 !important;
+  text-decoration: line-through;
+}
+
+/* Persist completed tasks for dynamically updated labels */
+.toggle-task-label.completed {
+  color: #3fb950 !important;
+  text-decoration: line-through;
+}

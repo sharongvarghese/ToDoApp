@@ -4,42 +4,46 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section class="py-5 bg-light text-center">
+<section class="hero-section py-5 text-center">
   <div class="container">
-    <h1 class="display-4 fw-bold">Welcome to TodoApp</h1>
-    <p class="lead mb-4">Organize your tasks efficiently and boost your productivity.</p>
+    <h1 class="display-5 fw-bold">Welcome to TodoApp</h1>
+    <p class="lead">Organize your tasks efficiently and boost your productivity.</p>
     {% if not current_user.is_authenticated %}
-    <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg">Get Started</a>
+    <a href="{{ url_for('signup') }}" class="btn btn-success btn-lg mt-3">Get Started</a>
     {% endif %}
   </div>
 </section>
 
 {% if current_user.is_authenticated %}
 <section class="py-5">
-  <div class="container text-center">
+  <div class="container">
     <div class="row {% if user_cards|length == 0 %} justify-content-center {% endif %}">
 
       <!-- Today Card -->
       <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
           <div class="card-body">
-            <h5 class="card-title">Today</h5>
+            <h5 class="card-title text-light border-bottom pb-2">Today</h5>
             {% for task in today_tasks %}
-            <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex justify-content-between mb-2 align-items-center">
               <div class="form-check">
                 <input class="form-check-input toggle-task" type="checkbox" value="{{ task.id }}" id="task{{ task.id }}" 
                   {% if task.completed %} checked {% endif %} data-id="{{task.id}}"/>
-                <label class="form-check-label {% if task.completed %}text-decoration-line-through text-muted{% endif %}" 
+                <label class="form-check-label {% if task.completed %}text-success text-decoration-line-through{% else %}text-light{% endif %}" 
                        for="task{{ task.id }}">{{ task.task }}</label>
               </div>
-              <div>
-                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="text-danger" onclick="return confirm('Are you sure?')">
-                  <i class="bi bi-trash"></i></a>
+              <div class="d-flex align-items-center">
+                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="text-info me-2 edit-btn" data-id="{{task.id}}" data-task="{{task.task}}" data-priority="{{task.priority}}">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <a href="{{ url_for('delete_task', task_id=task.id) }}"class="text-danger"onclick="return confirm('Are you sure you want to delete the task: {{task.task}} ?');">
+                  <i class="bi bi-trash"></i>
+                </a>
+
               </div>
             </div>
             {% else %}
-            <p>No tasks for today!</p>
+            <p class="text-muted">No tasks for today!</p>
             {% endfor %}
           </div>
         </div>
@@ -48,32 +52,35 @@
       <!-- User Cards -->
       {% for card in user_cards %}
       <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
           <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title">{{ card.name }}</h5>
-              <form method="POST" action="{{ url_for('delete_card', card_id=card.id) }}" style="display:inline;">
-                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this card?')">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+              <h5 class="card-title text-light">{{ card.name }}</h5>
+              <form method="POST" action="{{ url_for('delete_card', card_id=card.id) }}" class="delete-card-form" data-card-name="{{card.name}}" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                   <i class="bi bi-trash"></i>
                 </button>
               </form>
             </div>
             {% for task in card.tasks %}
-            <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex justify-content-between mb-2 align-items-center">
               <div class="form-check">
                 <input class="form-check-input toggle-task" type="checkbox" value="{{ task.id }}" id="task{{ task.id }}" 
                   {% if task.completed %} checked {% endif %} data-id="{{task.id}}"/>
-                <label class="form-check-label {% if task.completed %}text-decoration-line-through text-muted{% endif %}" 
+                <label class="form-check-label {% if task.completed %}text-success text-decoration-line-through{% else %}text-light{% endif %}" 
                        for="task{{ task.id }}">{{ task.task }}</label>
               </div>
-              <div>
-                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="text-danger" onclick="return confirm('Are you sure?')">
-                  <i class="bi bi-trash"></i></a>
+              <div class="d-flex align-items-center">
+                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="text-info me-2 edit-btn" data-id="{{task.id}}" data-task="{{task.task}}" data-priority="{{task.priority}}">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <a href="{{ url_for('delete_task', task_id=task.id) }}"class="text-danger"onclick="return confirm('Are you sure you want to delete the task: {{task.task}} ?');">
+                  <i class="bi bi-trash"></i>
+                </a>
               </div>
             </div>
             {% else %}
-            <p>No tasks in this card!</p>
+            <p class="text-muted">No tasks in this card!</p>
             {% endfor %}
           </div>
         </div>
